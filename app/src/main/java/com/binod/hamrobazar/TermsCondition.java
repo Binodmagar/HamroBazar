@@ -73,7 +73,7 @@ public class TermsCondition extends AppCompatActivity{
 private void StoreUserTerms(){
         SharedPreferences sharedPreferences = getSharedPreferences("Term", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("agree", true);
+        editor.putBoolean("agreed", true);
         editor.commit();
 }
 

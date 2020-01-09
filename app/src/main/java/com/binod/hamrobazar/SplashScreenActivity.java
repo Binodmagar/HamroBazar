@@ -20,7 +20,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                SharedPreferences sharedPreferences = getSharedPreferences("Terms", MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences("Term", MODE_PRIVATE);
                 Boolean agreed = sharedPreferences.getBoolean("agreed",false);
 
                 if(agreed.equals(true)){
