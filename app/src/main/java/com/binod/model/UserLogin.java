@@ -3,10 +3,10 @@ package com.binod.model;
 public class UserLogin {
 
     private String fullName;
-    private String email;
+    private String username;
     private String password;
-    private String phone;
-    private String mobilePhone;
+    private Integer phone;
+    private Integer mobilePhone;
     private String street;
     private String area;
     private String city;
@@ -15,9 +15,9 @@ public class UserLogin {
     private Boolean agree;
     private String image;
 
-    public UserLogin(String fullName, String email, String password, String phone, String mobilePhone, String street, String area, String city, Boolean newsletter, Boolean hidePhone, Boolean agree, String image) {
+    public UserLogin(String fullName, String username, String password, Integer phone, Integer mobilePhone, String street, String area, String city, Boolean newsletter, Boolean hidePhone, Boolean agree, String image) {
         this.fullName = fullName;
-        this.email = email;
+        this.username = username;
         this.password = password;
         this.phone = phone;
         this.mobilePhone = mobilePhone;
@@ -38,12 +38,12 @@ public class UserLogin {
         this.fullName = fullName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -54,19 +54,19 @@ public class UserLogin {
         this.password = password;
     }
 
-    public String getPhone() {
+    public Integer getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(Integer phone) {
         this.phone = phone;
     }
 
-    public String getMobilePhone() {
+    public Integer getMobilePhone() {
         return mobilePhone;
     }
 
-    public void setMobilePhone(String mobilePhone) {
+    public void setMobilePhone(Integer mobilePhone) {
         this.mobilePhone = mobilePhone;
     }
 

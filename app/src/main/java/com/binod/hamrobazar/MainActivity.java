@@ -5,12 +5,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
@@ -21,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     Dialog Dialog;
     ViewFlipper viewFlipper;
     private RecyclerView rvFirst, rvSecond;
+    Button btnRegister;
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -41,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         imgIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowPopUp(v);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -49,16 +55,17 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         //recycleview first
 
 
     }
-    public void ShowPopUp(View v){
-        Dialog.setContentView(R.layout.activity_login);
-        Dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        Dialog.show();
-    }
+//    public void ShowPopUp(View v){
+//        Dialog.setContentView(R.layout.activity_login);
+//        Dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        Dialog.show();
+//    }
+
+
 }
 
 
