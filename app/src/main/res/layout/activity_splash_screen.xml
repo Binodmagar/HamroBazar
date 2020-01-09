@@ -43,7 +43,6 @@
         android:id="@+id/textView"
         android:layout_width="315dp"
         android:layout_height="15dp"
-        android:layout_marginTop="48dp"
         android:fontFamily="@font/allan"
         android:text="By using Hamrobazar.com App/service implies that you have read and accepted"
         android:textColor="@color/textcolor"
@@ -51,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/textView2"
@@ -75,12 +74,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="104dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/allan"
         android:text="our Terms Of Usem Safety Tips and Ad Posting Rules"
         android:textColor="@color/textcolor"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

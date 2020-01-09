@@ -3,8 +3,10 @@ package com.binod.hamrobazar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -18,9 +20,20 @@ public class SplashScreenActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
-                startActivity(intent);
+                SharedPreferences sharedPreferences = getSharedPreferences("Terms", MODE_PRIVATE);
+                Boolean agreed = sharedPreferences.getBoolean("agreed",false);
+
+                if(agreed.equals(true)){
+                    Toast.makeText(SplashScreenActivity.this, "Successed", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(SplashScreenActivity.this, TermsCondition.class);
+                    startActivity(intent);
+                    finish();
+                }
+
             }
-        },1000);
+        },2000);
     }
 }
