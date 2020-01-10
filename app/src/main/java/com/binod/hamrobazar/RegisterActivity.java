@@ -229,8 +229,8 @@ public class RegisterActivity extends AppCompatActivity{
         String username = etEmailR.getText().toString();
         String fullName = etFullName.getText().toString();
         String password = etPasswordR.getText().toString();
-        Integer phone = Integer.parseInt(etPhoneNo.getText().toString());
-        Integer mobilePhone = Integer.valueOf(etMobileNo.getText()+"");
+        int phone = Integer.parseInt(etPhoneNo.getText().toString());
+//        int mobilePhone = Integer.parseInt(etMobileNo.getText().toString());
         String street = etStreet.getText().toString();
         String area = etArea.getText().toString();
         String city = etCity.getSelectedItem().toString();
@@ -238,7 +238,7 @@ public class RegisterActivity extends AppCompatActivity{
         boolean hidePhone = Boolean.parseBoolean(String.valueOf(cbHidePhone.isChecked()? true : false));
         boolean agree = Boolean.parseBoolean(String.valueOf(cbAgree.isChecked()?true : false));
 
-        UserLogin userLogin = new UserLogin(fullName, username, password, phone, mobilePhone, street, area, city, newsletter, hidePhone, agree, imgName);
+        UserLogin userLogin = new UserLogin(fullName, username, password, phone, street, area, city, newsletter, hidePhone, agree, imgName);
 
 
         UserLoginAPI userLoginAPI = Url.getInstance().create(UserLoginAPI.class);

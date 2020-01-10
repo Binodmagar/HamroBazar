@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
 //        int i = R.drawable.laptopa;
 //        Toast.makeText(this, i+"", Toast.LENGTH_SHORT).show();
+
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
