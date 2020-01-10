@@ -1,5 +1,8 @@
 package com.binod.bll;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import com.binod.api.UserLoginAPI;
 import com.binod.serverresponse.SignUpResponse;
 import com.binod.url.Url;
@@ -18,12 +21,13 @@ public class LoginBLL {
 
         try {
             Response<SignUpResponse> loginResponse = usersCall.execute();
-            if (loginResponse.isSuccessful() && loginResponse.body().getStatus().equals("Login success")) {
+            if (loginResponse.isSuccessful() && loginResponse.body().getStatus().equals("Login success!")) {
                 Url.token += loginResponse.body().getToken();
 
                 isSuccess = true;
             }
         } catch (IOException e) {
+            Log.d("failure", ""+e);
             e.printStackTrace();
         }
         return isSuccess;

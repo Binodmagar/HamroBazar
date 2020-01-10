@@ -102,6 +102,8 @@ public class RegisterActivity extends AppCompatActivity{
                     if(validation()){
                         saveImage();
                         register();
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(intent);
                     }
                 }else{
                     Toast.makeText(RegisterActivity.this, "Password does not match", Toast.LENGTH_SHORT).show();
@@ -229,8 +231,8 @@ public class RegisterActivity extends AppCompatActivity{
         String username = etEmailR.getText().toString();
         String fullName = etFullName.getText().toString();
         String password = etPasswordR.getText().toString();
-        int phone = Integer.parseInt(etPhoneNo.getText().toString());
-//        int mobilePhone = Integer.parseInt(etMobileNo.getText().toString());
+        String phone = etPhoneNo.getText().toString();
+        String mobilePhone = etMobileNo.getText().toString();
         String street = etStreet.getText().toString();
         String area = etArea.getText().toString();
         String city = etCity.getSelectedItem().toString();
@@ -238,7 +240,7 @@ public class RegisterActivity extends AppCompatActivity{
         boolean hidePhone = Boolean.parseBoolean(String.valueOf(cbHidePhone.isChecked()? true : false));
         boolean agree = Boolean.parseBoolean(String.valueOf(cbAgree.isChecked()?true : false));
 
-        UserLogin userLogin = new UserLogin(fullName, username, password, phone, street, area, city, newsletter, hidePhone, agree, imgName);
+        UserLogin userLogin = new UserLogin(fullName, username, password, phone, mobilePhone, street, area, city, newsletter, hidePhone, agree, imgName);
 
 
         UserLoginAPI userLoginAPI = Url.getInstance().create(UserLoginAPI.class);
