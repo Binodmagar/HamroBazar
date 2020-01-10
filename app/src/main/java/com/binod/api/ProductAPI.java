@@ -11,6 +11,6 @@ public interface ProductAPI {
     @GET("products/")
     Call<List<Product>> getRecentProduct();
 
-    @GET("trend")
+    @GET("products/trending")
     Call<List<Product>> getTrendProduct();
 }

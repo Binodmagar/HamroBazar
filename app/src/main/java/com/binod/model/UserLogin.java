@@ -5,8 +5,8 @@ public class UserLogin {
     private String fullName;
     private String username;
     private String password;
-    private int phone;
-//    private int mobilePhone;
+    private String phone;
+    private String mobilePhone;
     private String street;
     private String area;
     private String city;
@@ -15,11 +15,12 @@ public class UserLogin {
     private Boolean agree;
     private String image;
 
-    public UserLogin(String fullName, String username, String password, int phone, String street, String area, String city, Boolean newsletter, Boolean hidePhone, Boolean agree, String image) {
+    public UserLogin(String fullName, String username, String password, String phone, String mobilePhone, String street, String area, String city, Boolean newsletter, Boolean hidePhone, Boolean agree, String image) {
         this.fullName = fullName;
         this.username = username;
         this.password = password;
         this.phone = phone;
+        this.mobilePhone = mobilePhone;
         this.street = street;
         this.area = area;
         this.city = city;
@@ -53,12 +54,20 @@ public class UserLogin {
         this.password = password;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
     }
 
     public String getStreet() {

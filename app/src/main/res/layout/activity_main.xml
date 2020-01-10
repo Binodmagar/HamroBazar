@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:text="Recents Listed Ads"
+                    android:text="Recent Listed Ads"
                     />
                 <Button
                     android:layout_margin="10dp"

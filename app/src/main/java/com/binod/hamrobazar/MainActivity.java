@@ -17,8 +17,11 @@ import android.widget.ViewFlipper;
 
 import com.binod.adpater.ProductAdapter;
 import com.binod.api.ProductAPI;
+import com.binod.api.UserLoginAPI;
 import com.binod.model.Product;
+import com.binod.model.UserLogin;
 import com.binod.url.Url;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,14 +80,17 @@ public class MainActivity extends AppCompatActivity {
         //recycleview first
         rvFirst = findViewById(R.id.rvFirst);
         ProductAPI productAPI = Url.getInstance().create(ProductAPI.class);
-        Call<List<Product>> listCall = productAPI.getRecentProduct();
+        Call<List<Product>> listCall = productAPI.getTrendProduct();
         listCall.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
 //                List<Product> treandingAdsList=new ArrayList<>();
 //                treandingAdsList.add(new Product("Samsung Phone","2131230847",1000,"new",true));
 
-
+                if(!response.isSuccessful()){
+                    Toast.makeText(MainActivity.this, "Code"+ response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 List<Product> productList = response.body();
                 ProductAdapter productAdapter = new ProductAdapter(MainActivity.this, productList);
                 rvFirst.setAdapter(productAdapter);
@@ -97,6 +103,33 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "failed" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        //recycleview second
+        rvSecond = findViewById(R.id.rvSecond);
+        ProductAPI productAPI1 = Url.getInstance().create(ProductAPI.class);
+        Call<List<Product>> listCall1 = productAPI1.getRecentProduct();
+        listCall1.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(MainActivity.this, "Code" + response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                List<Product> productList1 = response.body();
+                ProductAdapter productAdapter1 = new ProductAdapter(MainActivity.this,productList1);
+                rvSecond.setAdapter(productAdapter1);
+                rvSecond.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Erros" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        loadCurrentUser();
 
 
     }
@@ -120,6 +153,32 @@ public class MainActivity extends AppCompatActivity {
         viewFlipper.setOutAnimation(this,android.R.anim.slide_out_right);
 
     }
+
+    private void loadCurrentUser(){
+        UserLoginAPI userLoginAPI = Url.getInstance().create(UserLoginAPI.class);
+        Call<UserLogin> userLoginCall = userLoginAPI.getUserDetails(Url.token);
+
+        userLoginCall.enqueue(new Callback<UserLogin>() {
+            @Override
+            public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(MainActivity.this, "Code" + response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String imgPath = Url.imagePath + response.body().getImage();
+
+                Picasso.get().load(imgPath).into(imgIcon);
+            }
+
+            @Override
+            public void onFailure(Call<UserLogin> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Errors" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
 }
 
