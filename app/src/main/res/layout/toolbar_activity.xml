@@ -19,7 +19,6 @@
 
     <ImageView
         android:id="@+id/imgIcon"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="250dp"
         android:onClick="ShowPopUp"
         android:src="@drawable/ic_person_black_24dp"

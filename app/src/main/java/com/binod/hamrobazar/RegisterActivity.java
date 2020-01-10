@@ -2,9 +2,13 @@ package com.binod.hamrobazar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.loader.content.CursorLoader;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,7 +44,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import strictmode.StrictModeClass;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity{
     CircleImageView imgProfile;
     EditText etEmailR,etFullName,etPasswordR,etConfirmPassword,etPhoneNo,etMobileNo,etStreet,etArea;
     Spinner etCity;
@@ -80,27 +84,33 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         //setting arraydapter for city
         ArrayAdapter arrayAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_list_item_1
+                this, android.R.layout.simple_list_item_1,City
 
         );
         etCity.setAdapter(arrayAdapter);
 
-        imgProfile.setOnClickListener(this);
-        btnRegister.setOnClickListener(this);
-
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageBrowse();
+            }
+        });
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(etConfirmPassword.getText().toString().equals(etPasswordR.getText().toString())){
+                    if(validation()){
+                        saveImage();
+                        register();
+                    }
+                }else{
+                    Toast.makeText(RegisterActivity.this, "Password does not match", Toast.LENGTH_SHORT).show();
+                    etPasswordR.requestFocus();
+                    return;
+                }
+            }
+        });
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.imgProfile:
-                break;
-
-            case R.id.btnRegister:
-
-        }
-    }
-
     //validation for register user
     private boolean validation(){
         boolean status = true;
@@ -124,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             etPhoneNo.requestFocus();
             status = false;
         }
-        if(etMobileNo.getText().toString().length() <= 10){
+        if(etMobileNo.getText().toString().length() < 10){
             etMobileNo.setError("Your phone number must be of 10 digits");
             etMobileNo.requestFocus();
             status = false;
@@ -215,12 +225,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private  void Register(){
-        String email = etEmailR.getText().toString();
+    private  void register(){
+        String username = etEmailR.getText().toString();
         String fullName = etFullName.getText().toString();
         String password = etPasswordR.getText().toString();
         Integer phone = Integer.parseInt(etPhoneNo.getText().toString());
-        Integer mobileNo = Integer.parseInt(etMobileNo.getText().toString());
+        Integer mobilePhone = Integer.valueOf(etMobileNo.getText()+"");
         String street = etStreet.getText().toString();
         String area = etArea.getText().toString();
         String city = etCity.getSelectedItem().toString();
@@ -228,11 +238,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         boolean hidePhone = Boolean.parseBoolean(String.valueOf(cbHidePhone.isChecked()? true : false));
         boolean agree = Boolean.parseBoolean(String.valueOf(cbAgree.isChecked()?true : false));
 
-        UserLogin userLogin = new UserLogin(fullName, email, password, phone, mobileNo, street, area, city, newsletter, hidePhone, agree, imgName);
+        UserLogin userLogin = new UserLogin(fullName, username, password, phone, mobilePhone, street, area, city, newsletter, hidePhone, agree, imgName);
+
 
         UserLoginAPI userLoginAPI = Url.getInstance().create(UserLoginAPI.class);
         Call<SignUpResponse> signUpResponseCall = userLoginAPI.registerUser(userLogin);
-
+        CheckPermission();
         signUpResponseCall.enqueue(new Callback<SignUpResponse>() {
             @Override
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
@@ -250,6 +261,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
+    }
+
+    private void CheckPermission()
+    {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED ||ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED )
+        {
+            ActivityCompat.requestPermissions(this,new String[]{
+                    Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},0);
+        }
     }
 }
 

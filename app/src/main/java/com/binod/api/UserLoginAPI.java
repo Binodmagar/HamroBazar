@@ -22,13 +22,13 @@ public interface UserLoginAPI {
 
     @FormUrlEncoded
     @POST("users/login")
-    Call<SignUpResponse> checkUser(@Field("email") String username, @Field("password") String password);
+    Call<SignUpResponse> checkUser(@Field("username") String username, @Field("password") String password);
 
 
     @Multipart
     @POST("upload")
     Call<ImageResponse> uploadImage(@Part MultipartBody.Part img);
 
-    @GET
+    @GET("users/me")
     Call<UserLogin> getUserDetails(@Header("Authorization") String token);
 }

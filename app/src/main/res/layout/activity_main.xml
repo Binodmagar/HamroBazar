@@ -25,7 +25,7 @@
             <ViewFlipper
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:id="@+id/vflipper"
+                android:id="@+id/viewFilpper"
                 android:layout_centerHorizontal="true"
                 >
                 <LinearLayout
@@ -82,7 +82,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/mobile"
+                        android:drawableLeft="@drawable/mobilea"
                         android:text="Mobile Handset"
                         android:textSize="20sp"
                         />
@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:text="Popular Trending Ads"
+                    android:text="Recents Listed Ads"
                     />
                 <Button
                     android:layout_margin="10dp"
