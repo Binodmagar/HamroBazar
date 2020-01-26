@@ -52,7 +52,6 @@ public class LoginActivity extends AppCompatActivity {
         String password = etPassword.getText().toString();
 
         LoginBLL loginBLL = new LoginBLL();
-
         StrictModeClass.StrictMode();
         if(loginBLL.checkUser(username, password)){
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
